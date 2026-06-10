@@ -243,7 +243,9 @@ class YouTube:
             logger.error(f"Prefetch failed for {link}: {e}")
         return False
 
-    async def get_related(self, video_id: str, video: bool = False) -> Track | None:
+    async def get_related(
+        self, video_id: str, video: bool = False, max_duration: int = 0
+    ) -> Track | None:
         try:
             _results = await Recommendations.getRelated(video_id)
             if not isinstance(_results, dict):
@@ -252,6 +254,14 @@ class YouTube:
             if results:
                 # Filter for only video types and pick a random one
                 videos = [r for r in results if r.get("type") == "video"]
+
+                if max_duration:
+                    videos = [
+                        v
+                        for v in videos
+                        if utils.to_seconds(v.get("duration") or "00:00") <= max_duration
+                    ]
+
                 if not videos:
                     return None
                 data = random.choice(videos)

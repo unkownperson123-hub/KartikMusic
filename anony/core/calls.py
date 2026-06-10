@@ -213,7 +213,12 @@ class TgCall(PyTgCalls):
         if not media:
             if await db.get_autoplay(chat_id):
                 if current and isinstance(current, Track):
-                    media = await yt.get_related(current.id, video=current.video)
+                    # Set max duration for autoplay tracks based on current song
+                    # but capped at 15 minutes to avoid extremely long tracks
+                    max_duration = min(int(current.duration_sec * 1.5), 900)
+                    media = await yt.get_related(
+                        current.id, video=current.video, max_duration=max_duration
+                    )
                     if media:
                         queue.add(chat_id, media)
                     else:
