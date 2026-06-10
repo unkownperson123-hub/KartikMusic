@@ -27,7 +27,6 @@ async def main():
     await app.boot()
     await userbot.boot()
     await anon.boot()
-    await thumb.start()
 
     for module in all_modules:
         importlib.import_module(f"anony.plugins.{module}")

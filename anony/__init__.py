@@ -74,6 +74,5 @@ async def stop() -> None:
     await app.exit()
     await userbot.exit()
     await db.close()
-    await thumb.close()
 
     logger.info("Stopped.\n")
