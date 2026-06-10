@@ -284,9 +284,9 @@ class TgCall(PyTgCalls):
 
                 _lang = await lang.get_lang(update.chat_id)
                 if update.action == types.GroupCallParticipant.Action.JOINED:
-                    text = _lang["vclog_joined"].format(user.mention)
+                    text = _lang["vclog_joined"].format(user.mention, user.id)
                 elif update.action == types.GroupCallParticipant.Action.LEFT:
-                    text = _lang["vclog_left"].format(user.mention)
+                    text = _lang["vclog_left"].format(user.mention, user.id)
                 else:
                     return
 
