@@ -1,16 +1,11 @@
-# Copyright (c) 2025 AnonymousX1025
-# Licensed under the MIT License.
-# This file is part of AnonXMusic
-
-
 import asyncio
 import signal
 import importlib
 from contextlib import suppress
 
-from anony import (anon, app, config, db, logger,
+from KartikMusic import (Kartik, app, config, db, logger,
                    stop, thumb, userbot, yt)
-from anony.plugins import all_modules
+from KartikMusic.plugins import all_modules
 
 
 async def idle():
@@ -27,10 +22,10 @@ async def main():
     await thumb.start()
     await app.boot()
     await userbot.boot()
-    await anon.boot()
+    await Kartik.boot()
 
     for module in all_modules:
-        importlib.import_module(f"anony.plugins.{module}")
+        importlib.import_module(f"KartikMusic.plugins.{module}")
     logger.info(f"Loaded {len(all_modules)} modules.")
 
     if config.COOKIES_URL:
