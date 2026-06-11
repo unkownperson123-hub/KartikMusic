@@ -1,1 +1,1 @@
-uv run python3 -m KartikMusic
+uv run --no-sync python3 -m KartikMusic
