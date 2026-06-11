@@ -223,11 +223,17 @@ class TgCall(PyTgCalls):
                     if media:
                         queue.add(chat_id, media)
                     else:
-                        return await self.stop(chat_id)
+                        await self.stop(chat_id)
+                        _lang = await lang.get_lang(chat_id)
+                        return await app.send_message(chat_id, _lang["queue_finished"])
                 else:
-                    return await self.stop(chat_id)
+                    await self.stop(chat_id)
+                    _lang = await lang.get_lang(chat_id)
+                    return await app.send_message(chat_id, _lang["queue_finished"])
             else:
-                return await self.stop(chat_id)
+                await self.stop(chat_id)
+                _lang = await lang.get_lang(chat_id)
+                return await app.send_message(chat_id, _lang["queue_finished"])
 
         _lang = await lang.get_lang(chat_id)
         msg = None
