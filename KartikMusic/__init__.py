@@ -54,7 +54,7 @@ queue = Queue()
 thumb = Thumbnail()
 
 from KartikMusic.core.calls import TgCall
-anon = TgCall()
+Kartik = TgCall()
 
 
 async def stop() -> None:

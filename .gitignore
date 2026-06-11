@@ -8,6 +8,6 @@ venv/
 cache/
 downloads/
 __pycache__/
-anony/cookies/*.txt
+KartikMusic/cookies/*.txt
 *.session
 *.session-journal
