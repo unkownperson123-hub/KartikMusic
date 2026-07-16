@@ -317,19 +317,22 @@ class TgCall(PyTgCalls):
                         return await self.play_media(chat_id, msg, media)
                     else:
                         await self.stop(chat_id)
-                        if msg:
-                            return await msg.edit_text(_lang["queue_finished"])
-                        return await app.send_message(chat_id, _lang["queue_finished"])
+                        try:
+                            if msg:
+                                await msg.delete()
+                        except Exception:
+                            pass
+                        return
                 else:
                     await self.stop(chat_id)
-                    return await app.send_message(chat_id, _lang["queue_finished"])
+                    return
             else:
                 await self.stop(chat_id)
                 if skip_user:
                     await app.send_message(
                         chat_id, _lang["play_skipped"].format(skip_user)
                     )
-                return await app.send_message(chat_id, _lang["queue_finished"])
+                return
 
         # If we reached here, media was already retrieved by queue.get_next above
 
